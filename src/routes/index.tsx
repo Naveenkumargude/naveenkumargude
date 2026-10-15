@@ -2,7 +2,6 @@ import { useEffect, useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDown,
-  ArrowRight,
   ArrowUp,
   ArrowUpRight,
   CircuitBoard,
@@ -11,12 +10,16 @@ import {
   Github,
   GraduationCap,
   Linkedin,
+  MapPin,
   Mail,
   Menu,
   Microchip,
+  Moon,
+  Phone,
   Radio,
   Send,
   Sparkles,
+  Sun,
   X,
 } from "lucide-react";
 
@@ -129,6 +132,17 @@ function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [formStatus, setFormStatus] = useState("");
+  const [lightTheme, setLightTheme] = useState(false);
+  const [themeLoaded, setThemeLoaded] = useState(false);
+
+  useEffect(() => {
+    setLightTheme(window.localStorage.getItem("naveen-theme") === "light");
+    setThemeLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (themeLoaded) window.localStorage.setItem("naveen-theme", lightTheme ? "light" : "dark");
+  }, [lightTheme, themeLoaded]);
 
   useEffect(() => {
     const revealObserver = new IntersectionObserver(
@@ -140,7 +154,7 @@ function Portfolio() {
           }
         });
       },
-      { threshold: 0.12 },
+      { threshold: 0.01, rootMargin: "0px 0px -5% 0px" },
     );
     document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
 
@@ -180,7 +194,7 @@ function Portfolio() {
   }
 
   return (
-    <main>
+    <main className={`portfolio-shell${lightTheme ? " light-theme" : ""}`}>
       <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
         <div className="header-inner">
           <a className="brand-mark" href="#home" aria-label="Naveen Kumar Gude, home">
@@ -193,20 +207,32 @@ function Portfolio() {
               </a>
             ))}
           </nav>
-          <Button asChild className="nav-cta">
-            <a href="#contact">LET’S TALK <ArrowUpRight aria-hidden="true" /></a>
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="menu-toggle"
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-          </Button>
+          <div className="header-actions">
+            <Button
+              variant="outline"
+              size="icon"
+              className="theme-toggle"
+              aria-label={`Switch to ${lightTheme ? "dark" : "light"} theme`}
+              title={`Switch to ${lightTheme ? "dark" : "light"} theme`}
+              onClick={() => setLightTheme((value) => !value)}
+            >
+              {lightTheme ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
+            </Button>
+            <Button asChild className="nav-cta">
+              <a href="#contact">LET’S TALK <ArrowUpRight aria-hidden="true" /></a>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="menu-toggle"
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </Button>
+          </div>
         </div>
         <nav id="mobile-navigation" className={`mobile-nav${menuOpen ? " open" : ""}`} aria-label="Mobile navigation" aria-hidden={!menuOpen}>
           {navItems.map(({ label, id }) => (
@@ -227,7 +253,8 @@ function Portfolio() {
             <p className="hero-description">I’m an Electronics and Communication Engineering student exploring the intersection of hardware, software, and intelligent technology. From PCBs and Verilog to embedded projects and drone simulation, I enjoy turning technical ideas into practical solutions.</p>
             <div className="hero-actions">
               <Button asChild className="button-gold"><a href="#projects">EXPLORE MY PROJECTS <ArrowUpRight aria-hidden="true" /></a></Button>
-              <Button asChild variant="outline" className="button-quiet"><a href="#contact">GET IN TOUCH <ArrowRight aria-hidden="true" /></a></Button>
+              <Button asChild variant="outline" size="icon" className="hero-social-link"><a href="https://www.linkedin.com/in/naveenkumargudeece" target="_blank" rel="noreferrer" aria-label="Naveen on LinkedIn" title="LinkedIn"><Linkedin aria-hidden="true" /></a></Button>
+              <Button asChild variant="outline" size="icon" className="hero-social-link"><a href="https://github.com/NAVEENKUMARGUDE333" target="_blank" rel="noreferrer" aria-label="Naveen on GitHub" title="GitHub"><Github aria-hidden="true" /></a></Button>
             </div>
             <a className="scroll-cue" href="#about">SCROLL TO EXPLORE <ArrowDown aria-hidden="true" /></a>
           </div>
@@ -333,9 +360,9 @@ function Portfolio() {
             <div className="contact-details reveal">
               <p className="contact-intro">Open to learning opportunities, technical collaboration, engineering projects, and opportunities to grow.</p>
               <a className="contact-item" href="mailto:gudenaveenkumar9@gmail.com"><span className="contact-icon"><Mail /></span><span><small>WRITE TO ME</small><strong>gudenaveenkumar9@gmail.com</strong></span><ArrowUpRight /></a>
-              <a className="contact-item" href="tel:+919652392414"><span className="contact-icon"><Radio /></span><span><small>GIVE ME A CALL</small><strong>+91 9652392414</strong></span><ArrowUpRight /></a>
-              <div className="contact-location"><span className="contact-icon"><Radio /></span><span><small>BASED IN</small><strong>Vijayawada, Andhra Pradesh, India</strong></span></div>
-              <div className="social-links"><a href="https://www.linkedin.com/in/naveenkumargudeece" target="_blank" rel="noreferrer" aria-label="Naveen on LinkedIn"><Linkedin /> LINKEDIN <ArrowUpRight /></a><a href="https://github.com/NAVEENKUMARGUDE333" target="_blank" rel="noreferrer" aria-label="Naveen on GitHub"><Github /> GITHUB <ArrowUpRight /></a></div>
+              <a className="contact-item" href="tel:+919652392414"><span className="contact-icon"><Phone /></span><span><small>GIVE ME A CALL</small><strong>+91 9652392414</strong></span><ArrowUpRight /></a>
+              <div className="contact-location"><span className="contact-icon"><MapPin /></span><span><small>BASED IN</small><strong>Vijayawada, Andhra Pradesh, India</strong></span></div>
+              <div className="social-links"><a href="https://www.linkedin.com/in/naveenkumargudeece" target="_blank" rel="noreferrer" aria-label="Naveen on LinkedIn"><span className="social-logo"><Linkedin /></span><span><small>CONNECT ON</small><strong>LinkedIn</strong></span><ArrowUpRight /></a><a href="https://github.com/NAVEENKUMARGUDE333" target="_blank" rel="noreferrer" aria-label="Naveen on GitHub"><span className="social-logo"><Github /></span><span><small>EXPLORE MY</small><strong>GitHub</strong></span><ArrowUpRight /></a></div>
             </div>
             <form className="contact-form reveal" onSubmit={sendMessage}>
               <div className="form-row"><label>Name<input name="name" type="text" autoComplete="name" placeholder="Your name" required /></label><label>Email<input name="email" type="email" autoComplete="email" placeholder="you@example.com" required /></label></div>
@@ -363,12 +390,12 @@ function Portfolio() {
 function EngineeringIdentity() {
   return (
     <div className="identity-wrap" aria-label="Naveen’s engineering identity card">
-      <div className="identity-coordinate">FIG. 01 — PERSONAL CIRCUIT</div>
-      <svg className="identity-traces" viewBox="0 0 520 450" fill="none" aria-hidden="true"><path d="M5 340h78v-48h35v-48h54" /><path d="M333 38h64v43h89" /><path d="M428 308h48v-43h35" /><circle cx="172" cy="244" r="4" /><circle cx="486" cy="81" r="4" /><circle cx="476" cy="308" r="4" /></svg>
-      <div className="identity-card"><div className="identity-card-top"><span>ECE / VLSI ENGINEERING</span><span>IND / 27</span></div><div className="portrait-placeholder"><div className="portrait-cross">+</div><span>PORTRAIT<br />AREA</span><div className="portrait-corner" /></div><div className="identity-monogram">NK<span>.</span></div><div className="identity-card-bottom"><span>NAVEEN KUMAR GUDE</span><span>ENGINEERING / STUDENT</span></div><div className="identity-serial">NK–ECE–001</div></div>
-      <div className="identity-stamp"><Microchip aria-hidden="true" /><span>BUILT<br />TO LEARN</span></div>
-      <div className="identity-side-note">HARDWARE × SOFTWARE × CURIOSITY</div>
-      <div className="identity-crosshair" aria-hidden="true">+</div>
+      <div className="identity-card">
+        <span className="identity-label">ECE STUDENT · VIJAYAWADA</span>
+        <span className="identity-monogram">NK<span>.</span></span>
+        <span className="identity-name">NAVEEN KUMAR GUDE</span>
+        <span className="identity-focus">VLSI · EMBEDDED SYSTEMS · PCB DESIGN</span>
+      </div>
     </div>
   );
 }
