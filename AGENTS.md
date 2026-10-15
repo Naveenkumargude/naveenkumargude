@@ -11,3 +11,4 @@
 
 - Keep the portfolio as one scrollable home page with section IDs, because its primary navigation and visual reference use a single continuous journey.
 - Persist the visitor's light/dark theme selection in browser storage, because it is a user-controlled display preference expected to survive reloads.
+- Keep theme-aware identity branding, the typed role line, and the vertical profile card together in the single home route so the portfolio remains one continuous journey.

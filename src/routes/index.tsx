@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import darkLogo from "@/assets/nk-logo-dark.png.asset.json";
+import lightLogo from "@/assets/nk-logo-light.png.asset.json";
 
 const navItems = [
   { label: "Home", id: "home" },
@@ -34,6 +36,8 @@ const navItems = [
   { label: "Experience", id: "experience" },
   { label: "Contact", id: "contact" },
 ];
+
+const technicalTopics = ["PCB DESIGN", "VERILOG HDL", "EMBEDDED SYSTEMS", "VLSI", "AI + ELECTRONICS"];
 
 const skills = [
   {
@@ -198,7 +202,7 @@ function Portfolio() {
       <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
         <div className="header-inner">
           <a className="brand-mark" href="#home" aria-label="Naveen Kumar Gude, home">
-            NK<span>.</span>
+            <img src={lightTheme ? lightLogo.url : darkLogo.url} alt="Naveen Kumar Gude logo" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             {navItems.map(({ label, id }) => (
@@ -249,7 +253,7 @@ function Portfolio() {
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow"><span className="eyebrow-dot" /> Curious by design. Engineered through experiments.</p>
             <h1><span className="hero-line">HELLO,</span><span className="hero-line">I’M <em>NAVEEN</em></span><span className="hero-line">KUMAR<span className="gold-dot">.</span></span></h1>
-            <p className="hero-role">ECE STUDENT <i /> VLSI ENTHUSIAST <i /> EMBEDDED SYSTEMS EXPLORER</p>
+            <AnimatedTitle />
             <p className="hero-description">I’m an Electronics and Communication Engineering student exploring the intersection of hardware, software, and intelligent technology. From PCBs and Verilog to embedded projects and drone simulation, I enjoy turning technical ideas into practical solutions.</p>
             <div className="hero-actions">
               <Button asChild className="button-gold"><a href="#projects">EXPLORE MY PROJECTS <ArrowUpRight aria-hidden="true" /></a></Button>
@@ -258,12 +262,18 @@ function Portfolio() {
             </div>
             <a className="scroll-cue" href="#about">SCROLL TO EXPLORE <ArrowDown aria-hidden="true" /></a>
           </div>
-          <EngineeringIdentity />
+          <EngineeringIdentity lightTheme={lightTheme} />
           <div className="hero-coordinate coordinate-top" aria-hidden="true">16°30′N / 80°38′E</div>
           <div className="hero-coordinate coordinate-bottom" aria-hidden="true">ECE • 2027</div>
         </div>
         <div className="ticker" aria-label="Technical interests">
-          <div className="ticker-track"><span>PCB DESIGN</span><b>✳</b><span>VERILOG HDL</span><b>✳</b><span>EMBEDDED SYSTEMS</span><b>✳</b><span>VLSI</span><b>✳</b><span>AI + ELECTRONICS</span><b>✳</b><span>PCB DESIGN</span><b>✳</b><span>VERILOG HDL</span><b>✳</b><span>EMBEDDED SYSTEMS</span><b>✳</b><span>VLSI</span><b>✳</b><span>AI + ELECTRONICS</span><b>✳</b></div>
+          <div className="ticker-track" aria-hidden="true">
+            {Array.from({ length: 6 }, (_, group) => technicalTopics.map((topic, index) => (
+              <span className="ticker-item" key={`${group}-${topic}`}>
+                {topic}<b aria-hidden="true">✳</b>
+              </span>
+            )))}
+          </div>
         </div>
       </section>
 
@@ -377,7 +387,7 @@ function Portfolio() {
 
       <footer className="site-footer">
         <div className="page-width footer-main">
-          <a className="footer-brand" href="#home"><span className="brand-mark">NK<span>.</span></span><span><strong>NAVEEN KUMAR GUDE</strong><small>ECE STUDENT · VLSI · EMBEDDED SYSTEMS</small></span></a>
+          <a className="footer-brand" href="#home"><span className="brand-mark"><img src={lightTheme ? lightLogo.url : darkLogo.url} alt="" /></span><span><strong>NAVEEN KUMAR GUDE</strong><small>ECE STUDENT · VLSI · EMBEDDED SYSTEMS</small></span></a>
           <nav aria-label="Footer navigation">{["home", "about", "projects", "contact"].map((id) => <a key={id} href={`#${id}`}>{id.toUpperCase()}</a>)}</nav>
           <a className="back-top" href="#home" aria-label="Back to top"><ArrowUp /></a>
         </div>
@@ -387,12 +397,49 @@ function Portfolio() {
   );
 }
 
-function EngineeringIdentity() {
+function AnimatedTitle() {
+  const roles = ["Embedded systems explorer", "VLSI design enthusiast", "PCB design learner"];
+  const [typedText, setTypedText] = useState("");
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTypedText(roles[0] ?? "Embedded systems explorer");
+      return;
+    }
+
+    const target = roles[roleIndex] ?? roles[0] ?? "Embedded systems explorer";
+    const complete = typedText === target;
+    const delay = deleting ? (typedText.length === 0 ? 420 : 42) : complete ? 1400 : 82;
+    const timer = window.setTimeout(() => {
+      if (!deleting && complete) {
+        setDeleting(true);
+      } else if (deleting && typedText.length === 0) {
+        setDeleting(false);
+        setRoleIndex((current) => (current + 1) % roles.length);
+      } else {
+        setTypedText((current) => deleting ? current.slice(0, -1) : target.slice(0, current.length + 1));
+      }
+    }, delay);
+
+    return () => window.clearTimeout(timer);
+  }, [deleting, roleIndex, typedText]);
+
+  return (
+    <div className="hero-profession" role="group" aria-label={`Electrical & Electronics Engineer, ${roles[roleIndex] ?? "Embedded systems explorer"}`}>
+      <span className="profession-title" aria-hidden="true">Electrical &amp; Electronics Engineer</span>
+      <span className="typed-role" aria-hidden="true">{typedText}<i /></span>
+    </div>
+  );
+}
+
+function EngineeringIdentity({ lightTheme }: { lightTheme: boolean }) {
   return (
     <div className="identity-wrap" aria-label="Naveen’s engineering identity card">
       <div className="identity-card">
         <span className="identity-label">ECE STUDENT · VIJAYAWADA</span>
-        <span className="identity-monogram">NK<span>.</span></span>
+        <img className="identity-logo" src={lightTheme ? lightLogo.url : darkLogo.url} alt="" />
         <span className="identity-name">NAVEEN KUMAR GUDE</span>
         <span className="identity-focus">VLSI · EMBEDDED SYSTEMS · PCB DESIGN</span>
       </div>
