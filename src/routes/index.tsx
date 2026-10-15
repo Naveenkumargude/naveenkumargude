@@ -26,6 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import darkLogo from "@/assets/nk-logo-dark.png.asset.json";
 import lightLogo from "@/assets/nk-logo-light.png.asset.json";
+import profilePhoto from "@/assets/naveen-profile-photo.png.asset.json";
 
 const navItems = [
   { label: "Home", id: "home" },
@@ -439,7 +440,9 @@ function EngineeringIdentity({ lightTheme }: { lightTheme: boolean }) {
     <div className="identity-wrap" aria-label="Naveen’s engineering identity card">
       <div className="identity-card">
         <span className="identity-label">ECE STUDENT · VIJAYAWADA</span>
-        <img className="identity-logo" src={lightTheme ? lightLogo.url : darkLogo.url} alt="" />
+        <div className="identity-portrait">
+          <img className="identity-photo" src={profilePhoto.url} alt="Portrait of Naveen Kumar Gude" />
+        </div>
         <span className="identity-name">NAVEEN KUMAR GUDE</span>
         <span className="identity-focus">VLSI · EMBEDDED SYSTEMS · PCB DESIGN</span>
       </div>
