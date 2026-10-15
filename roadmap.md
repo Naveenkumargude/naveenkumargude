@@ -13,4 +13,4 @@
 - [x] Add the animated typed engineering-role line shown in the reference.
 - [x] Verify theme variants, typing animation, profile-card proportions, and continuous scrolling in preview.
 - [x] Add Naveen’s uploaded portrait to the vertical profile card.
-- [ ] Verify portrait crop and card layout in both themes and on mobile.
+- [x] Verify portrait crop and card layout in both themes and on mobile.
