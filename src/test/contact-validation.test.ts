@@ -19,7 +19,7 @@ describe("contact form validation", () => {
   });
 
   it("rejects email addresses longer than 255 characters", () => {
-    expect(contactFormSchema.safeParse({ ...validContact, email: `${"a".repeat(244)}@x.com` }).success).toBe(false);
+    expect(contactFormSchema.safeParse({ ...validContact, email: `${"a".repeat(250)}@x.com` }).success).toBe(false);
   });
 
   it("rejects subjects longer than 200 characters", () => {
