@@ -11,4 +11,4 @@
 - [x] Add the supplied dark and light logo variants to the portfolio and browser icon.
 - [x] Make the profile ID a larger vertical rectangle.
 - [x] Add the animated typed engineering-role line shown in the reference.
-- [ ] Verify theme variants, typing animation, profile-card proportions, and continuous scrolling in preview.
+- [x] Verify theme variants, typing animation, profile-card proportions, and continuous scrolling in preview.
