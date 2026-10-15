@@ -1,5 +1,6 @@
 # Portfolio follow-up
 
+- [ ] Connect the contact form to the supplied EmailJS service and retain submissions in Lovable Cloud.
 - [x] Add a persistent light/dark theme switch.
 - [x] Simplify the hero profile card and keep it rectangular.
 - [x] Improve scroll reveals so page sections remain visible between scroll positions.
