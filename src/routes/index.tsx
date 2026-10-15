@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDown,
@@ -27,6 +28,12 @@ import { Button } from "@/components/ui/button";
 import darkLogo from "@/assets/nk-logo-dark.png.asset.json";
 import lightLogo from "@/assets/nk-logo-light.png.asset.json";
 import profilePhoto from "@/assets/naveen-profile-photo.png.asset.json";
+import { contactFormSchema } from "@/lib/contact-validation";
+import { supabase } from "@/integrations/supabase/client";
+
+const EMAILJS_PUBLIC_KEY = "eI-5_jMmssO9YMy8Z";
+const EMAILJS_TEMPLATE_ID = "template_qua3pco";
+const EMAILJS_SERVICE_ID = "service_5ckhbrv";
 
 const navItems = [
   { label: "Home", id: "home" },
@@ -137,6 +144,7 @@ function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [formStatus, setFormStatus] = useState("");
+  const [formSending, setFormSending] = useState(false);
   const [lightTheme, setLightTheme] = useState(false);
   const [themeLoaded, setThemeLoaded] = useState(false);
 
@@ -186,16 +194,39 @@ function Portfolio() {
     };
   }, []);
 
-  function sendMessage(event: FormEvent<HTMLFormElement>) {
+  async function sendMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const subject = String(formData.get("subject") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
-    const body = `From: ${name} (${email})\n\n${message}`;
-    setFormStatus("Your email app is opening with your message ready to send.");
-    window.location.href = `mailto:gudenaveenkumar9@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const form = event.currentTarget;
+    const result = contactFormSchema.safeParse(Object.fromEntries(new FormData(form)));
+    if (!result.success) {
+      setFormStatus(result.error.issues[0]?.message ?? "Check your details and try again.");
+      return;
+    }
+
+    setFormSending(true);
+    setFormStatus("Sending your message…");
+    const { name, email, subject, message } = result.data;
+    const { error } = await supabase.from("contact_submissions").insert({ name, email, subject, message });
+    if (error) {
+      setFormStatus("We couldn’t save your message. Please use the email link to contact me.");
+      setFormSending(false);
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        { name, email, from_name: name, from_email: email, reply_to: email, subject, message },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      setFormStatus("Your message was sent successfully. Thank you for reaching out.");
+      form.reset();
+    } catch {
+      setFormStatus("Your message is saved, but email delivery failed. Please contact me directly using the email link.");
+    } finally {
+      setFormSending(false);
+    }
   }
 
   return (
@@ -376,11 +407,11 @@ function Portfolio() {
               <div className="social-links"><a href="https://www.linkedin.com/in/naveenkumargudeece" target="_blank" rel="noreferrer" aria-label="Naveen on LinkedIn"><span className="social-logo"><Linkedin /></span><span><small>CONNECT ON</small><strong>LinkedIn</strong></span><ArrowUpRight /></a><a href="https://github.com/NAVEENKUMARGUDE333" target="_blank" rel="noreferrer" aria-label="Naveen on GitHub"><span className="social-logo"><Github /></span><span><small>EXPLORE MY</small><strong>GitHub</strong></span><ArrowUpRight /></a></div>
             </div>
             <form className="contact-form reveal" onSubmit={sendMessage}>
-              <div className="form-row"><label>Name<input name="name" type="text" autoComplete="name" placeholder="Your name" required /></label><label>Email<input name="email" type="email" autoComplete="email" placeholder="you@example.com" required /></label></div>
-              <label>Subject<input name="subject" type="text" placeholder="What would you like to discuss?" required /></label>
-              <label>Message<textarea name="message" rows={4} placeholder="Write your message..." required /></label>
-              <Button type="submit" className="button-gold form-submit">SEND MESSAGE <Send aria-hidden="true" /></Button>
-              <p className="form-note" role="status">{formStatus || "Submitting opens your email app with the message filled in."}</p>
+              <div className="form-row"><label>Name<input name="name" type="text" autoComplete="name" placeholder="Your name" maxLength={100} required /></label><label>Email<input name="email" type="email" autoComplete="email" placeholder="you@example.com" maxLength={255} required /></label></div>
+              <label>Subject<input name="subject" type="text" placeholder="What would you like to discuss?" maxLength={200} required /></label>
+              <label>Message<textarea name="message" rows={4} placeholder="Write your message..." maxLength={5000} required /></label>
+              <Button type="submit" className="button-gold form-submit" disabled={formSending}>{formSending ? "SENDING…" : "SEND MESSAGE"} <Send aria-hidden="true" /></Button>
+              <p className="form-note" role="status">{formStatus || "Your message will be sent directly to my inbox."}</p>
             </form>
           </div>
         </div>
