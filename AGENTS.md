@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep the portfolio as one scrollable home page with section IDs, because its primary navigation and visual reference use a single continuous journey.
+- Persist the visitor's light/dark theme selection in browser storage, because it is a user-controlled display preference expected to survive reloads.

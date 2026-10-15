@@ -10,10 +10,12 @@ import {
   Github,
   GraduationCap,
   Linkedin,
+  MapPin,
   Mail,
   Menu,
   Microchip,
   Moon,
+  Phone,
   Radio,
   Send,
   Sparkles,
@@ -358,8 +360,8 @@ function Portfolio() {
             <div className="contact-details reveal">
               <p className="contact-intro">Open to learning opportunities, technical collaboration, engineering projects, and opportunities to grow.</p>
               <a className="contact-item" href="mailto:gudenaveenkumar9@gmail.com"><span className="contact-icon"><Mail /></span><span><small>WRITE TO ME</small><strong>gudenaveenkumar9@gmail.com</strong></span><ArrowUpRight /></a>
-              <a className="contact-item" href="tel:+919652392414"><span className="contact-icon"><Radio /></span><span><small>GIVE ME A CALL</small><strong>+91 9652392414</strong></span><ArrowUpRight /></a>
-              <div className="contact-location"><span className="contact-icon"><Radio /></span><span><small>BASED IN</small><strong>Vijayawada, Andhra Pradesh, India</strong></span></div>
+              <a className="contact-item" href="tel:+919652392414"><span className="contact-icon"><Phone /></span><span><small>GIVE ME A CALL</small><strong>+91 9652392414</strong></span><ArrowUpRight /></a>
+              <div className="contact-location"><span className="contact-icon"><MapPin /></span><span><small>BASED IN</small><strong>Vijayawada, Andhra Pradesh, India</strong></span></div>
               <div className="social-links"><a href="https://www.linkedin.com/in/naveenkumargudeece" target="_blank" rel="noreferrer" aria-label="Naveen on LinkedIn"><span className="social-logo"><Linkedin /></span><span><small>CONNECT ON</small><strong>LinkedIn</strong></span><ArrowUpRight /></a><a href="https://github.com/NAVEENKUMARGUDE333" target="_blank" rel="noreferrer" aria-label="Naveen on GitHub"><span className="social-logo"><Github /></span><span><small>EXPLORE MY</small><strong>GitHub</strong></span><ArrowUpRight /></a></div>
             </div>
             <form className="contact-form reveal" onSubmit={sendMessage}>

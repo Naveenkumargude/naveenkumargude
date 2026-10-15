@@ -448,8 +448,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (max-width: 390px) {
   .page-width, .header-inner { width: calc(100% - 32px); }
   .hero-copy h1 { font-size: 54px; }
-  .hero-actions { align-items: stretch; flex-direction: column; }
-  .hero-actions > a { width: 100%; }
+  .hero-actions { align-items: center; flex-direction: row; }
+  .hero-actions > a:first-child { width: 100%; }
+  .hero-actions > a:not(:first-child) { width: 44px; }
   .form-row { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; }
 }
@@ -461,8 +462,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Keep page content present while scroll animations initialize. */
 .reveal { opacity: 1; transform: none; }
-.reveal.is-visible { animation: reveal-in 500ms cubic-bezier(.2,.7,.2,1) both; }
-@keyframes reveal-in { from { opacity: .7; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.reveal.is-visible { animation: reveal-in 260ms cubic-bezier(.2,.7,.2,1) both; }
+@keyframes reveal-in { from { opacity: .9; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
 /* An optional light palette for the neutral sections; blue feature bands stay on-brand. */
 .portfolio-shell.light-theme {
@@ -486,6 +487,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .portfolio-shell.light-theme .site-header,
 .portfolio-shell.light-theme .site-header.is-scrolled { background: var(--brand-blue); }
+.portfolio-shell.light-theme .site-header { --brand-paper: oklch(1 0 89.88); --brand-muted: oklch(0.86 0.034 267); }
 .portfolio-shell.light-theme .hero-section,
 .portfolio-shell.light-theme .skills-section,
 .portfolio-shell.light-theme .contact-section,

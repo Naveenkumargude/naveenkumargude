@@ -5,4 +5,4 @@
 - [x] Improve scroll reveals so page sections remain visible between scroll positions.
 - [x] Increase small text sizes throughout and strengthen contact presentation.
 - [x] Replace the hero “Get in touch” link with working LinkedIn and GitHub icons.
-- [ ] Verify theme persistence, social destinations, mobile layout, and scrolling in preview.
+- [x] Verify theme persistence, social destinations, mobile layout, and scrolling in preview.
