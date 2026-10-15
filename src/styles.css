@@ -514,6 +514,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .portfolio-shell.light-theme .site-footer .footer-brand small,
 .portfolio-shell.light-theme .site-footer .footer-main nav a,
 .portfolio-shell.light-theme .site-footer .footer-bottom { color: var(--brand-muted); }
+.portfolio-shell.light-theme .site-header .brand-mark,
+.portfolio-shell.light-theme .footer-brand .brand-mark { background: var(--brand-paper); }
+.portfolio-shell.light-theme .identity-card { background: var(--brand-paper); }
 
 /* A cleaner, straight-edged identity panel. */
 .identity-wrap { display: grid; width: min(100%, 490px); aspect-ratio: 1.06; place-items: center; animation: none; }
