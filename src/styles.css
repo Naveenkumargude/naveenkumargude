@@ -515,11 +515,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .portfolio-shell.light-theme .site-footer .footer-main nav a,
 .portfolio-shell.light-theme .site-footer .footer-bottom { color: var(--brand-muted); }
 .portfolio-shell.light-theme .site-header .brand-mark,
-.portfolio-shell.light-theme .footer-brand .brand-mark { background: var(--brand-paper); }
-.portfolio-shell.light-theme .identity-card { background: var(--brand-paper); }
+.portfolio-shell.light-theme .footer-brand .brand-mark { background: var(--card); }
+.portfolio-shell.light-theme .identity-card {
+  --brand-paper: oklch(0.205 0.016 263);
+  --brand-muted: oklch(0.43 0.022 263);
+  border-color: oklch(0.84 0.015 263);
+  background: var(--card);
+}
 
 /* A cleaner, straight-edged identity panel. */
-.identity-wrap { display: grid; width: min(100%, 490px); aspect-ratio: 1.06; place-items: center; animation: none; }
+.identity-wrap { display: grid; width: min(100%, 490px); aspect-ratio: 0.92; place-items: center; animation: none; }
 .identity-card {
   position: relative;
   inset: auto;
@@ -613,7 +618,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-actions { display: grid; grid-template-columns: minmax(0, 1fr) 44px 44px; }
   .hero-actions > a:first-child { width: auto; grid-column: 1; }
   .hero-actions > a:not(:first-child) { width: 44px; }
-  .identity-wrap { width: min(100%, 340px); aspect-ratio: 1.08; margin-top: 12px; }
+  .identity-wrap { width: min(100%, 340px); aspect-ratio: 0.9; margin-top: 12px; }
   .identity-card { width: 80%; height: 92%; }
   .identity-logo { width: 84%; }
   .section { padding-block: 68px; }
