@@ -101,9 +101,9 @@ const projects = [
     kind: "PCB DESIGN / POWER ELECTRONICS",
     title: "AC-to-DC 5V power supply PCB",
     description:
-      "Designed a power supply PCB in EasyEDA, exploring circuit design, board layout, and the fundamentals of power conversion.",
-    tags: ["EasyEDA", "PCB design", "Power supply", "Electronics"],
-    highlights: ["AC-to-DC power conversion", "5V power supply design", "Circuit layout explored in EasyEDA"],
+      "Designed a single-layer AC-to-DC power supply PCB using EasyEDA to convert 240V AC into regulated 5V DC. The circuit uses a step-down transformer, bridge rectifier, filter capacitors, and a 7805 voltage regulator, with an LED indicator to show power output. This project helped me improve my schematic design, PCB routing, component placement, and 3D PCB visualization skills.",
+    tags: ["EasyEDA", "PCB Design", "Circuit Design", "Power Electronics", "7805 Voltage Regulator"],
+    highlights: ["Single-layer PCB designed in EasyEDA", "240V AC converted to regulated 5V DC", "Step-down transformer, bridge rectifier, filter capacitors, and 7805 regulator", "LED output indicator", "Schematic design, PCB routing, component placement, and 3D visualization"],
     art: "power",
   },
   {

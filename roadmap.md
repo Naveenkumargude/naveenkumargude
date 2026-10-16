@@ -23,3 +23,4 @@
 - [x] Replace project 01's portfolio screenshot cover with the newly uploaded AC-to-DC power-supply image; verify it loads on the main page.
 - [x] Remove the extra screenshot from project 01 details, leaving only the three supplied project images; verify the gallery controls.
 - [x] Add the Smart RFID Door Lock System image and supplied project details to project 02.
+- [x] Add the supplied AC-to-DC 5V power supply description and technologies to project 01.
