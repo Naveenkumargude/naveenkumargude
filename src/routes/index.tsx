@@ -45,6 +45,9 @@ import powerBoardLayout from "@/assets/power-supply-pcb-layout.jpg.asset.json";
 import powerSupplySchematic from "@/assets/power-supply-schematic.jpg.asset.json";
 import projectPowerSupplyCover from "@/assets/project-power-supply-cover.png.asset.json";
 import smartDoorLockImage from "@/assets/smart-door-lock-system.png.asset.json";
+import digitalClockShowcase from "@/assets/digital-clock-showcase.png.asset.json";
+import digitalClockRtlSchematic from "@/assets/digital-clock-rtl-schematic.jpeg.asset.json";
+import digitalClockVerilogCode from "@/assets/digital-clock-verilog-code.jpeg.asset.json";
 import { contactFormSchema } from "@/lib/contact-validation";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -129,11 +132,11 @@ const projects = [
   {
     number: "04",
     kind: "DIGITAL ELECTRONICS / HDL DESIGN",
-    title: "Digital clock in Verilog HDL",
+    title: "Digital Clock Using Verilog HDL",
     description:
-      "Designed a digital clock in Verilog HDL, exploring sequential logic, counters, timing concepts, and digital system design.",
-    tags: ["Verilog HDL", "Digital electronics", "RTL design", "Digital logic"],
-    highlights: ["Sequential logic", "Counters and timing concepts", "Digital system design"],
+      "A digital clock designed using Verilog HDL and RTL logic blocks to track hours, minutes, and seconds. The design combines adders, multiplexers (MUX), ROMs, and registers to implement counter logic with automatic rollover.",
+    tags: ["Verilog HDL", "Digital Electronics", "RTL Design", "FPGA", "Counters", "Adders", "Multiplexers", "Registers", "ROM"],
+    highlights: ["Digital timekeeping with hours, minutes, and seconds counters", "RTL-based design using adders, multiplexers, ROMs, and registers", "Clock and reset input support", "Automatic counter rollover with control logic", "Modular design for FPGA implementation and digital logic learning"],
     art: "clock",
   },
 ];
@@ -527,6 +530,10 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             <div className="project-art project-art-image">
               <img src={smartDoorLockImage.url} alt="Smart RFID door lock system with Arduino UNO, MFRC522 reader, keypad, LCD, and servo motor" />
             </div>
+          ) : project.number === "04" ? (
+            <div className="project-art project-art-image project-art-image-clock">
+              <img src={digitalClockShowcase.url} alt="Digital clock using Verilog HDL, with hours, minutes, seconds, RTL diagram, and FPGA display" />
+            </div>
           ) : <ProjectArtwork type={project.art} />}
           <span className="project-copy">
             <span className="project-meta"><span>PROJECT {project.number}</span><span>{project.kind}</span></span>
@@ -547,11 +554,13 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             <DialogTitle>{project.title}</DialogTitle>
             <DialogDescription>{project.kind}</DialogDescription>
           </DialogHeader>
-          {project.number === "01" ? <PowerProjectGallery /> : project.number === "02" ? (
+          {project.number === "01" ? <ProjectImageGallery images={powerProjectImages} galleryLabel="Power supply project images" /> : project.number === "02" ? (
             <figure className="project-dialog-artwork project-dialog-image">
               <img src={smartDoorLockImage.url} alt="Smart RFID door lock system infographic showing customer and manager authentication with Arduino UNO, RFID reader, keypad, LCD, and servo lock" />
             </figure>
-          ) : <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>}
+          ) : project.number === "04" ? <ProjectImageGallery images={clockProjectImages} galleryLabel="Digital clock project images" /> : (
+            <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>
+          )}
           <section className="project-detail-section" aria-labelledby={`project-overview-${project.number}`}>
             <h3 id={`project-overview-${project.number}`}><span />PROJECT OVERVIEW</h3>
             <p>{project.description}</p>
@@ -584,17 +593,23 @@ const powerProjectImages = [
   { src: powerSupplySchematic.url, alt: "EasyEDA circuit schematic for the AC-to-DC 5V power supply", label: "CIRCUIT SCHEMATIC" },
 ];
 
-function PowerProjectGallery() {
+const clockProjectImages = [
+  { src: digitalClockShowcase.url, alt: "Digital clock showcase with an RTL block diagram, FPGA display, and hours, minutes, and seconds counters", label: "DIGITAL CLOCK SHOWCASE" },
+  { src: digitalClockRtlSchematic.url, alt: "RTL logic diagram of the digital clock showing adders, multiplexers, ROMs, registers, clock, and reset", label: "RTL LOGIC DIAGRAM" },
+  { src: digitalClockVerilogCode.url, alt: "Verilog source code for the Digital_Clock module with reset and automatic counter rollover", label: "VERILOG SOURCE CODE" },
+];
+
+function ProjectImageGallery({ images, galleryLabel }: { images: { src: string; alt: string; label: string }[]; galleryLabel: string }) {
   const [activeImage, setActiveImage] = useState(0);
-  const image = powerProjectImages[activeImage];
+  const image = images[activeImage];
   if (!image) return null;
 
   function showImage(index: number) {
-    setActiveImage((index + powerProjectImages.length) % powerProjectImages.length);
+    setActiveImage((index + images.length) % images.length);
   }
 
   return (
-    <section className="project-image-gallery" aria-label="Project images">
+    <section className="project-image-gallery" aria-label={galleryLabel}>
       <figure className="project-gallery-image" aria-live="polite">
         <img key={image.src} src={image.src} alt={image.alt} />
         <figcaption><span>{String(activeImage + 1).padStart(2, "0")}</span> {image.label}</figcaption>
@@ -604,7 +619,7 @@ function PowerProjectGallery() {
           <ChevronLeft aria-hidden="true" />
         </Button>
         <div className="project-gallery-pagination">
-          {powerProjectImages.map((item, index) => (
+          {images.map((item, index) => (
             <Button
               key={item.src}
               variant="ghost"
