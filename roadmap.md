@@ -15,3 +15,4 @@
 - [x] Verify theme variants, typing animation, profile-card proportions, and continuous scrolling in preview.
 - [x] Add Naveen’s uploaded portrait to the vertical profile card.
 - [x] Verify portrait crop and card layout in both themes and on mobile.
+- [ ] Open each project card into an animated, on-brand details view using its existing project facts; verify desktop and mobile.

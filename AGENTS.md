@@ -14,3 +14,4 @@
 - Keep theme-aware identity branding, the typed role line, and the vertical profile card together in the single home route so the portfolio remains one continuous journey.
 - Send contact form email through the visitor-side EmailJS client using the owner's public identifiers, and retain messages in a Cloud table with insert-only anonymous access so messages are not publicly readable.
 - Keep contact form input validation in a small shared schema module so browser submissions and boundary tests use the same limits.
+- Present project details in accessible dialog overlays opened by the project cards, keeping the portfolio's single-page navigation intact; this matches the supplied detail-view reference without adding separate page destinations.
