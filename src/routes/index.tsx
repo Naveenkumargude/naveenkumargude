@@ -550,10 +550,10 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             </span>
           </Button>
         </DialogTrigger>
-        {(project.number === "01" || project.number === "02") && (
+        {(project.number === "01" || project.number === "02" || project.number === "03") && (
           <div className="project-card-social-links" aria-label="Project links">
             <Button asChild variant="outline" className="project-card-social-link">
-              <a href={project.number === "01" ? "https://lnkd.in/p/dRVexfwi" : "https://lnkd.in/p/d4N6v2b5"} target="_blank" rel="noreferrer" aria-label={`View ${project.title} on LinkedIn`} title="LinkedIn">
+              <a href={project.number === "02" ? "https://lnkd.in/p/d4N6v2b5" : "https://lnkd.in/p/dRVexfwi"} target="_blank" rel="noreferrer" aria-label={`View ${project.title} on LinkedIn`} title="LinkedIn">
                 <Linkedin aria-hidden="true" /><span>LinkedIn</span>
               </a>
             </Button>
