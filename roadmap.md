@@ -25,4 +25,4 @@
 - [x] Add the Smart RFID Door Lock System image and supplied project details to project 02.
 - [x] Add the supplied AC-to-DC 5V power supply description and technologies to project 01.
 - [x] Add the digital-clock description and three supplied images to project 04; verify the card and details view.
-- [ ] Add the drone simulation description and uploaded screenshot to project 03; verify the card and details view.
+- [x] Add the drone simulation description and uploaded screenshot to project 03; verify the card and details view.
