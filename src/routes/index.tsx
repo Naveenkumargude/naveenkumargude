@@ -48,6 +48,7 @@ import smartDoorLockImage from "@/assets/smart-door-lock-system.png.asset.json";
 import digitalClockShowcase from "@/assets/digital-clock-showcase.png.asset.json";
 import digitalClockRtlSchematic from "@/assets/digital-clock-rtl-schematic.jpeg.asset.json";
 import digitalClockVerilogCode from "@/assets/digital-clock-verilog-code.jpeg.asset.json";
+import droneControlSimulation from "@/assets/drone-control-simulation.png.asset.json";
 import { contactFormSchema } from "@/lib/contact-validation";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -122,11 +123,11 @@ const projects = [
   {
     number: "03",
     kind: "DRONE SIMULATION / PROGRAMMING",
-    title: "Python-based drone control",
+    title: "Drone Control Simulation",
     description:
-      "A Python project using PySimVerse to explore software-driven control, simulation, and the interaction between code and drone behavior.",
-    tags: ["Python", "PySimVerse", "Drones", "Simulation"],
-    highlights: ["Python-based control", "Drone behavior in simulation", "Exploration with PySimVerse"],
+      "Developed a real-time drone control simulation using Python and PySimVerse, enabling keyboard-based flight navigation, movement, rotation, altitude control, takeoff, and landing.",
+    tags: ["Python", "PySimVerse", "Keyboard Module", "Drone Simulation", "Robotics"],
+    highlights: ["Real-time keyboard-based drone movement", "Forward, backward, left, and right navigation", "Altitude and yaw control", "Automated takeoff and landing"],
     art: "drone",
   },
   {
@@ -530,6 +531,10 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             <div className="project-art project-art-image">
               <img src={smartDoorLockImage.url} alt="Smart RFID door lock system with Arduino UNO, MFRC522 reader, keypad, LCD, and servo motor" />
             </div>
+          ) : project.number === "03" ? (
+            <div className="project-art project-art-image project-art-image-feature">
+              <img src={droneControlSimulation.url} alt="Drone control simulation showing Python keyboard flight controls and a drone in a 3D landscape" />
+            </div>
           ) : project.number === "04" ? (
             <div className="project-art project-art-image project-art-image-clock">
               <img src={digitalClockShowcase.url} alt="Digital clock using Verilog HDL, with hours, minutes, seconds, RTL diagram, and FPGA display" />
@@ -557,6 +562,10 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
           {project.number === "01" ? <ProjectImageGallery images={powerProjectImages} galleryLabel="Power supply project images" /> : project.number === "02" ? (
             <figure className="project-dialog-artwork project-dialog-image">
               <img src={smartDoorLockImage.url} alt="Smart RFID door lock system infographic showing customer and manager authentication with Arduino UNO, RFID reader, keypad, LCD, and servo lock" />
+            </figure>
+          ) : project.number === "03" ? (
+            <figure className="project-dialog-artwork project-dialog-image project-dialog-image-feature">
+              <img src={droneControlSimulation.url} alt="Drone Control Simulation interface with Python and PySimVerse keyboard-based flight navigation, altitude, yaw, takeoff, and landing controls" />
             </figure>
           ) : project.number === "04" ? <ProjectImageGallery images={clockProjectImages} galleryLabel="Digital clock project images" /> : (
             <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>
