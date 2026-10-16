@@ -19,3 +19,4 @@
 - [x] Add the three supplied power-supply images to project 01 details in a scrollable gallery; verify desktop and mobile.
 
 - [x] Change project 01 images to a one-at-a-time gallery with the 3D board image first and click controls; verify navigation.
+- [x] Add the new AC-to-DC power-supply project overview image as the first image in project 01's gallery.

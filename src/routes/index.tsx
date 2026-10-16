@@ -43,6 +43,7 @@ import profilePhoto from "@/assets/naveen-profile-photo.png.asset.json";
 import powerBoardRender from "@/assets/power-supply-3d-board.jpg.asset.json";
 import powerBoardLayout from "@/assets/power-supply-pcb-layout.jpg.asset.json";
 import powerSupplySchematic from "@/assets/power-supply-schematic.jpg.asset.json";
+import powerSupplyOverview from "@/assets/ac-to-dc-5v-power-supply.png.asset.json";
 import { contactFormSchema } from "@/lib/contact-validation";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -565,6 +566,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
 }
 
 const powerProjectImages = [
+  { src: powerSupplyOverview.url, alt: "AC-to-DC 5V power supply project overview showing the circuit schematic, PCB layouts, 3D board, and conversion stages", label: "PROJECT OVERVIEW" },
   { src: powerBoardRender.url, alt: "3D render of the AC-to-DC 5V power supply circuit board", label: "3D BOARD VIEW" },
   { src: powerBoardLayout.url, alt: "PCB layout showing component placement and copper traces for the AC-to-DC converter", label: "PCB LAYOUT" },
   { src: powerSupplySchematic.url, alt: "EasyEDA circuit schematic for the AC-to-DC 5V power supply", label: "CIRCUIT SCHEMATIC" },
