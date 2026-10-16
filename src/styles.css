@@ -283,8 +283,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .project-arrow svg { width: 13px; height: 13px; }
 .project-card:hover .project-arrow { background: var(--brand-gold); color: var(--brand-blue); }
 .project-card-social-links { display: flex; min-height: 54px; align-items: center; justify-content: flex-end; gap: 9px; padding: 8px 18px; border-top: 1px solid var(--brand-line); }
-.project-card-social-link { width: 36px; height: 36px; border-color: var(--brand-gold); border-radius: 5px; color: var(--brand-gold); }
+.project-card-social-link { width: auto; height: 36px; gap: 8px; padding-inline: 12px; border-color: var(--brand-gold); border-radius: 5px; color: var(--brand-gold); font-family: var(--font-display); font-size: 12px; font-weight: 600; }
 .project-card-social-link svg { width: 17px; height: 17px; }
+.project-card-social-link span { line-height: 1; }
 .project-card-social-link:hover { background: var(--brand-gold); color: var(--brand-blue); }
 
 /* On-brand, scrollable project details matching the supplied reference. */
@@ -337,7 +338,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .project-dialog-footer { min-height: 58px; flex-wrap: wrap; padding: 8px 12px; }
   .project-dialog-footer > span { max-width: 40%; font-size: 8px; }
   .project-card-social-links { min-height: 50px; padding-inline: 12px; }
-  .project-card-social-link { width: 34px; height: 34px; }
+  .project-card-social-link { height: 34px; padding-inline: 10px; font-size: 11px; }
   .project-dialog-close { min-height: 36px; padding-inline: 12px; font-size: 12px; }
 }
 

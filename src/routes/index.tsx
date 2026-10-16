@@ -552,14 +552,14 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         </DialogTrigger>
         {project.number === "01" && (
           <div className="project-card-social-links" aria-label="Project links">
-            <Button asChild variant="outline" size="icon" className="project-card-social-link">
+            <Button asChild variant="outline" className="project-card-social-link">
               <a href="https://lnkd.in/p/dRVexfwi" target="_blank" rel="noreferrer" aria-label="View project on LinkedIn" title="LinkedIn">
-                <Linkedin aria-hidden="true" />
+                <Linkedin aria-hidden="true" /><span>LinkedIn</span>
               </a>
             </Button>
-            <Button asChild variant="outline" size="icon" className="project-card-social-link">
+            <Button asChild variant="outline" className="project-card-social-link">
               <a href="https://github.com/NAVEENKUMARGUDE333/12V-to-5V-DC-Power-Supply-Converter-PCB" target="_blank" rel="noreferrer" aria-label="View project on GitHub" title="GitHub">
-                <Github aria-hidden="true" />
+                <Github aria-hidden="true" /><span>GitHub</span>
               </a>
             </Button>
           </div>
