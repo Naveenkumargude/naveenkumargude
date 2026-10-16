@@ -44,6 +44,7 @@ import powerBoardRender from "@/assets/power-supply-3d-board.jpg.asset.json";
 import powerBoardLayout from "@/assets/power-supply-pcb-layout.jpg.asset.json";
 import powerSupplySchematic from "@/assets/power-supply-schematic.jpg.asset.json";
 import projectPowerSupplyCover from "@/assets/project-power-supply-cover.png.asset.json";
+import smartDoorLockImage from "@/assets/smart-door-lock-system.png.asset.json";
 import { contactFormSchema } from "@/lib/contact-validation";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -107,12 +108,12 @@ const projects = [
   },
   {
     number: "02",
-    kind: "EMBEDDED SYSTEMS / AUTOMATION",
-    title: "Smart door lock system",
+    kind: "RFID ACCESS / EMBEDDED SYSTEMS",
+    title: "Smart RFID Door Lock System",
     description:
-      "Built a PIN-based smart door lock in the Wokwi simulator using Arduino, exploring embedded logic and hardware interaction.",
-    tags: ["Arduino", "Wokwi", "Embedded systems", "Automation"],
-    highlights: ["PIN-based access control", "Arduino embedded logic", "Hardware interaction in Wokwi"],
+      "Designed and simulated a multi-level smart door lock using Arduino UNO and Wokwi. RFID card authentication and keypad password verification provide separate customer and manager access, while a 16×2 LCD displays status and a servo motor controls the lock.",
+    tags: ["Arduino UNO", "RFID (MFRC522)", "Keypad", "LCD (I2C)", "Servo Motor", "C++", "Wokwi"],
+    highlights: ["RFID card and password-based authentication", "Separate customer and manager access", "Real-time status updates on a 16×2 LCD", "Servo-controlled door locking and unlocking", "Circuit design and simulation in Wokwi"],
     art: "lock",
   },
   {
@@ -522,6 +523,10 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             <div className="project-art project-art-image">
               <img src={projectPowerSupplyCover.url} alt="AC-to-DC 5V power supply PCB design with schematic, board layouts, and 3D circuit board" />
             </div>
+          ) : project.number === "02" ? (
+            <div className="project-art project-art-image">
+              <img src={smartDoorLockImage.url} alt="Smart RFID door lock system with Arduino UNO, MFRC522 reader, keypad, LCD, and servo motor" />
+            </div>
           ) : <ProjectArtwork type={project.art} />}
           <span className="project-copy">
             <span className="project-meta"><span>PROJECT {project.number}</span><span>{project.kind}</span></span>
@@ -542,7 +547,11 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             <DialogTitle>{project.title}</DialogTitle>
             <DialogDescription>{project.kind}</DialogDescription>
           </DialogHeader>
-          {project.number === "01" ? <PowerProjectGallery /> : <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>}
+          {project.number === "01" ? <PowerProjectGallery /> : project.number === "02" ? (
+            <figure className="project-dialog-artwork project-dialog-image">
+              <img src={smartDoorLockImage.url} alt="Smart RFID door lock system infographic showing customer and manager authentication with Arduino UNO, RFID reader, keypad, LCD, and servo lock" />
+            </figure>
+          ) : <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>}
           <section className="project-detail-section" aria-labelledby={`project-overview-${project.number}`}>
             <h3 id={`project-overview-${project.number}`}><span />PROJECT OVERVIEW</h3>
             <p>{project.description}</p>
