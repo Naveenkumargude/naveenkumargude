@@ -1,6 +1,7 @@
 # Portfolio follow-up
 
 - [x] Configure and verify Netlify deployment for the TanStack Start app without changing its existing preview target.
+- [ ] Fix broken Netlify portfolio images by proxying Lovable asset requests; verify after Netlify redeploys.
 
 - [x] Connect the contact form to the supplied EmailJS service and retain submissions in Lovable Cloud; validate the flow and remove the test entry.
 - [x] Add a persistent light/dark theme switch.

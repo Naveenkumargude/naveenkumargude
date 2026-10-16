@@ -4,3 +4,9 @@
 
 [build.environment]
   NETLIFY = "true"
+
+[[redirects]]
+  from = "/__l5e/assets-v1/*"
+  to = "https://naveenkumargude.lovable.app/__l5e/assets-v1/:splat"
+  status = 200
+  force = true

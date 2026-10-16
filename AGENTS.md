@@ -16,3 +16,4 @@
 - Keep contact form input validation in a small shared schema module so browser submissions and boundary tests use the same limits.
 - Present project details in accessible dialog overlays opened by the project cards, keeping the portfolio's single-page navigation intact; this matches the supplied detail-view reference without adding separate page destinations.
 - Use Netlify's TanStack Vite integration only for Netlify builds, leaving Nitro's Worker target intact elsewhere so Netlify deployment settings do not alter Lovable previews.
+- Proxy Lovable-hosted asset paths through Netlify to the published Lovable site, because those image files are not included in Netlify's static output.
