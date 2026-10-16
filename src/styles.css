@@ -266,7 +266,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .clock-display small { position: absolute; right: 9px; bottom: 7px; color: var(--brand-muted); font-size: 6px; letter-spacing: .1em; }
 .clock-wave { position: absolute; right: 14%; bottom: 22%; left: 14%; display: flex; height: 17px; align-items: center; justify-content: space-between; border-top: 1px solid oklch(1 0 0 / 26%); border-bottom: 1px solid oklch(1 0 0 / 26%); }
 .clock-wave span { width: 1px; height: 7px; background: var(--brand-gold); }.clock-wave span:nth-child(2n) { height: 15px; }.clock-wave span:nth-child(3n) { height: 4px; }
-.project-copy { padding: 21px 22px 0; }
+.project-copy { display: block; padding: 21px 22px 0; }
 .project-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 7px; color: var(--brand-gold); font-size: 7px; }
 .project-meta span:last-child { color: var(--brand-muted); text-align: right; }
 .project-card-title { display: block; margin: 14px 0 8px; font-family: var(--font-display); font-size: 21px; font-weight: 600; line-height: 1.2; }
@@ -304,6 +304,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .project-dialog-close { min-height: 38px; border-radius: 6px; background: color-mix(in oklab, var(--brand-paper) 12%, var(--brand-blue)); color: var(--brand-paper); font-family: var(--font-display); font-weight: 700; }
 .project-dialog-close:hover { background: var(--brand-gold); color: var(--brand-blue); }
 @keyframes project-dialog-enter { from { opacity: 0; transform: translateY(16px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 600px) {
+  .project-dialog { width: calc(100vw - 20px); height: min(92dvh, 900px); border-radius: 12px; }
+  .project-dialog-topline { min-height: 57px; gap: 8px; padding: 10px 14px; padding-right: 48px; font-size: 9px; }
+  .project-dialog-scroll { padding: 21px 17px 25px; }
+  .project-dialog-artwork .project-art { height: 190px; }
+  .project-detail-grid { grid-template-columns: 1fr; gap: 22px; }
+  .project-dialog-footer { min-height: 58px; padding: 8px 12px; }
+  .project-dialog-footer > span { max-width: 52%; font-size: 8px; }
+  .project-dialog-close { min-height: 36px; padding-inline: 12px; font-size: 12px; }
+}
 
 /* Experience and career interests */
 .experience-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8vw; align-items: start; }
@@ -458,8 +468,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .projects-grid { grid-template-columns: 1fr; gap: 17px; }
   .project-art { height: 205px; }
   .project-copy { padding-inline: 16px; }
-  .project-copy h3 { font-size: 19px; }
-  .project-copy > p { min-height: unset; }
+  .project-card-title { font-size: 19px; }
+  .project-card-description { min-height: unset; }
   .experience-layout, .drive-layout { grid-template-columns: 1fr; gap: 39px; }
   .experience-entry { grid-template-columns: 57px minmax(0, 1fr); gap: 14px; }
   .experience-copy h3 { font-size: 19px; }
@@ -602,8 +612,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .skill-card h3 { font-size: 19px; }
 .skill-card > p { font-size: 13px; }
 .tag-list span { font-size: 10px; }
-.project-copy > p { font-size: 14px; }
-.project-copy h3 { font-size: 23px; }
+.project-card-description { font-size: 14px; }
+.project-card-title { font-size: 23px; }
 .learning-list span, .interest-line p { font-size: 13px; }
 .interest-line > span, .interest-line h3 { font-size: 14px; }
 .drive-quote { font-size: 18px; }
@@ -654,7 +664,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .identity-wrap { width: min(100%, 340px); aspect-ratio: 0.82; margin-top: 12px; }
   .identity-card { width: 80%; height: 98%; padding: 16px; }
   .section { padding-block: 68px; }
-  .hero-description, .about-detail, .education-copy p, .experience-copy > p, .project-copy > p, .contact-intro { font-size: 14px; }
+  .hero-description, .about-detail, .education-copy p, .experience-copy > p, .project-card-description, .contact-intro { font-size: 14px; }
   .intro-note { font-size: 13px; }
   .interest-item h3 { font-size: 13px; }
   .interest-item p { font-size: 11px; }

@@ -522,7 +522,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
           </span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="project-dialog">
+      <DialogContent className="project-dialog" overlayClassName="project-dialog-backdrop">
         <div className="project-dialog-topline">
           <span>PROJECT {project.number}</span>
           <span>{project.kind}</span>
