@@ -44,7 +44,7 @@ import powerBoardRender from "@/assets/power-supply-3d-board.jpg.asset.json";
 import powerBoardLayout from "@/assets/power-supply-pcb-layout.jpg.asset.json";
 import powerSupplySchematic from "@/assets/power-supply-schematic.jpg.asset.json";
 import powerSupplyOverview from "@/assets/ac-to-dc-5v-power-supply.png.asset.json";
-import projectPortfolioGrid from "@/assets/project-portfolio-grid.png.asset.json";
+import projectPowerSupplyCover from "@/assets/project-power-supply-cover.png.asset.json";
 import { contactFormSchema } from "@/lib/contact-validation";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -521,7 +521,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         <Button variant="ghost" className={`project-card reveal stagger-${index + 1}`} aria-label={`View details for ${project.title}`}>
           {project.number === "01" ? (
             <div className="project-art project-art-image">
-              <img src={projectPortfolioGrid.url} alt="AC-to-DC power supply project displayed on the portfolio website" />
+              <img src={projectPowerSupplyCover.url} alt="AC-to-DC 5V power supply PCB design with schematic, board layouts, and 3D circuit board" />
             </div>
           ) : <ProjectArtwork type={project.art} />}
           <span className="project-copy">
