@@ -589,6 +589,20 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         </div>
         <DialogFooter className="project-dialog-footer">
           <span>PROJECT NOTES · NAVEEN KUMAR GUDE</span>
+          {project.number === "01" && (
+            <div className="project-dialog-links" aria-label="Project links">
+              <Button asChild variant="outline" size="icon" className="project-dialog-link">
+                <a href="https://lnkd.in/p/dRVexfwi" target="_blank" rel="noreferrer" aria-label="View project on LinkedIn" title="LinkedIn">
+                  <Linkedin aria-hidden="true" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="icon" className="project-dialog-link">
+                <a href="https://github.com/NAVEENKUMARGUDE333/12V-to-5V-DC-Power-Supply-Converter-PCB" target="_blank" rel="noreferrer" aria-label="View project on GitHub" title="GitHub">
+                  <Github aria-hidden="true" />
+                </a>
+              </Button>
+            </div>
+          )}
           <DialogClose asChild><Button className="project-dialog-close">Close details</Button></DialogClose>
         </DialogFooter>
       </DialogContent>
