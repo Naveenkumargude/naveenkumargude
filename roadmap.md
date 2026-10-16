@@ -21,3 +21,4 @@
 - [x] Change project 01 images to a one-at-a-time gallery with the 3D board image first and click controls; verify navigation.
 - [x] Add the new AC-to-DC power-supply project overview image as the first image in project 01's gallery.
 - [x] Replace project 01's portfolio screenshot cover with the newly uploaded AC-to-DC power-supply image; verify it loads on the main page.
+- [x] Remove the extra screenshot from project 01 details, leaving only the three supplied project images; verify the gallery controls.
