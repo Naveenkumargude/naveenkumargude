@@ -38,6 +38,9 @@ import {
 import darkLogo from "@/assets/nk-logo-dark.png.asset.json";
 import lightLogo from "@/assets/nk-logo-light.png.asset.json";
 import profilePhoto from "@/assets/naveen-profile-photo.png.asset.json";
+import powerBoardRender from "@/assets/power-supply-3d-board.jpg.asset.json";
+import powerBoardLayout from "@/assets/power-supply-pcb-layout.jpg.asset.json";
+import powerSupplySchematic from "@/assets/power-supply-schematic.jpg.asset.json";
 import { contactFormSchema } from "@/lib/contact-validation";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -533,6 +536,23 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             <DialogDescription>{project.kind}</DialogDescription>
           </DialogHeader>
           <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>
+          {project.number === "01" && (
+            <section className="project-detail-section project-image-gallery" aria-labelledby="project-images-01">
+              <h3 id="project-images-01"><span />PROJECT IMAGES</h3>
+              <figure className="project-gallery-image">
+                <img src={powerBoardRender.url} alt="3D render of the AC-to-DC 5V power supply circuit board" loading="lazy" />
+                <figcaption><span>01</span> 3D BOARD VIEW</figcaption>
+              </figure>
+              <figure className="project-gallery-image">
+                <img src={powerBoardLayout.url} alt="PCB layout showing component placement and copper traces for the AC-to-DC converter" loading="lazy" />
+                <figcaption><span>02</span> PCB LAYOUT</figcaption>
+              </figure>
+              <figure className="project-gallery-image">
+                <img src={powerSupplySchematic.url} alt="EasyEDA circuit schematic for the AC-to-DC 5V power supply" loading="lazy" />
+                <figcaption><span>03</span> CIRCUIT SCHEMATIC</figcaption>
+              </figure>
+            </section>
+          )}
           <section className="project-detail-section" aria-labelledby={`project-overview-${project.number}`}>
             <h3 id={`project-overview-${project.number}`}><span />PROJECT OVERVIEW</h3>
             <p>{project.description}</p>

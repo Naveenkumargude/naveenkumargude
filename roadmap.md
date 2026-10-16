@@ -16,3 +16,4 @@
 - [x] Add Naveen’s uploaded portrait to the vertical profile card.
 - [x] Verify portrait crop and card layout in both themes and on mobile.
 - [x] Open each project card into an animated, on-brand details view using its existing project facts; verify desktop and mobile.
+- [x] Add the three supplied power-supply images to project 01 details in a scrollable gallery; verify desktop and mobile.
