@@ -575,6 +575,7 @@ const powerProjectImages = [
 function PowerProjectGallery() {
   const [activeImage, setActiveImage] = useState(0);
   const image = powerProjectImages[activeImage];
+  if (!image) return null;
 
   function showImage(index: number) {
     setActiveImage((index + powerProjectImages.length) % powerProjectImages.length);
