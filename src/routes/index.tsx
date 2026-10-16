@@ -3,6 +3,8 @@ import emailjs from "@emailjs/browser";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDown,
+  ChevronLeft,
+  ChevronRight,
   ArrowUp,
   ArrowUpRight,
   CircuitBoard,
@@ -535,24 +537,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             <DialogTitle>{project.title}</DialogTitle>
             <DialogDescription>{project.kind}</DialogDescription>
           </DialogHeader>
-          <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>
-          {project.number === "01" && (
-            <section className="project-detail-section project-image-gallery" aria-labelledby="project-images-01">
-              <h3 id="project-images-01"><span />PROJECT IMAGES</h3>
-              <figure className="project-gallery-image">
-                <img src={powerBoardRender.url} alt="3D render of the AC-to-DC 5V power supply circuit board" loading="lazy" />
-                <figcaption><span>01</span> 3D BOARD VIEW</figcaption>
-              </figure>
-              <figure className="project-gallery-image">
-                <img src={powerBoardLayout.url} alt="PCB layout showing component placement and copper traces for the AC-to-DC converter" loading="lazy" />
-                <figcaption><span>02</span> PCB LAYOUT</figcaption>
-              </figure>
-              <figure className="project-gallery-image">
-                <img src={powerSupplySchematic.url} alt="EasyEDA circuit schematic for the AC-to-DC 5V power supply" loading="lazy" />
-                <figcaption><span>03</span> CIRCUIT SCHEMATIC</figcaption>
-              </figure>
-            </section>
-          )}
+          {project.number === "01" ? <PowerProjectGallery /> : <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>}
           <section className="project-detail-section" aria-labelledby={`project-overview-${project.number}`}>
             <h3 id={`project-overview-${project.number}`}><span />PROJECT OVERVIEW</h3>
             <p>{project.description}</p>
@@ -576,6 +561,53 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         </DialogFooter>
       </DialogContent>
     </Dialog>
+  );
+}
+
+const powerProjectImages = [
+  { src: powerBoardRender.url, alt: "3D render of the AC-to-DC 5V power supply circuit board", label: "3D BOARD VIEW" },
+  { src: powerBoardLayout.url, alt: "PCB layout showing component placement and copper traces for the AC-to-DC converter", label: "PCB LAYOUT" },
+  { src: powerSupplySchematic.url, alt: "EasyEDA circuit schematic for the AC-to-DC 5V power supply", label: "CIRCUIT SCHEMATIC" },
+];
+
+function PowerProjectGallery() {
+  const [activeImage, setActiveImage] = useState(0);
+  const image = powerProjectImages[activeImage];
+
+  function showImage(index: number) {
+    setActiveImage((index + powerProjectImages.length) % powerProjectImages.length);
+  }
+
+  return (
+    <section className="project-image-gallery" aria-label="Project images">
+      <figure className="project-gallery-image" aria-live="polite">
+        <img key={image.src} src={image.src} alt={image.alt} />
+        <figcaption><span>{String(activeImage + 1).padStart(2, "0")}</span> {image.label}</figcaption>
+      </figure>
+      <div className="project-gallery-controls" aria-label="Choose project image">
+        <Button variant="outline" size="icon" className="project-gallery-arrow" aria-label="Show previous project image" onClick={() => showImage(activeImage - 1)}>
+          <ChevronLeft aria-hidden="true" />
+        </Button>
+        <div className="project-gallery-pagination">
+          {powerProjectImages.map((item, index) => (
+            <Button
+              key={item.src}
+              variant="ghost"
+              size="sm"
+              className={`project-gallery-page${activeImage === index ? " is-active" : ""}`}
+              aria-label={`Show ${item.label.toLowerCase()}`}
+              aria-current={activeImage === index ? "true" : undefined}
+              onClick={() => showImage(index)}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </Button>
+          ))}
+        </div>
+        <Button variant="outline" size="icon" className="project-gallery-arrow" aria-label="Show next project image" onClick={() => showImage(activeImage + 1)}>
+          <ChevronRight aria-hidden="true" />
+        </Button>
+      </div>
+    </section>
   );
 }
 

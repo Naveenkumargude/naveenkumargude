@@ -17,3 +17,5 @@
 - [x] Verify portrait crop and card layout in both themes and on mobile.
 - [x] Open each project card into an animated, on-brand details view using its existing project facts; verify desktop and mobile.
 - [x] Add the three supplied power-supply images to project 01 details in a scrollable gallery; verify desktop and mobile.
+
+- [x] Change project 01 images to a one-at-a-time gallery with the 3D board image first and click controls; verify navigation.
