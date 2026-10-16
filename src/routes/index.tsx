@@ -521,34 +521,50 @@ function InterestLine({ number, title, description }: { number: string; title: s
 function ProjectCard({ project, index }: { project: (typeof projects)[number]; index: number }) {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="ghost" className={`project-card reveal stagger-${index + 1}`} aria-label={`View details for ${project.title}`}>
-          {project.number === "01" ? (
-            <div className="project-art project-art-image">
-              <img src={projectPowerSupplyCover.url} alt="AC-to-DC 5V power supply PCB design with schematic, board layouts, and 3D circuit board" />
-            </div>
-          ) : project.number === "02" ? (
-            <div className="project-art project-art-image">
-              <img src={smartDoorLockImage.url} alt="Smart RFID door lock system with Arduino UNO, MFRC522 reader, keypad, LCD, and servo motor" />
-            </div>
-          ) : project.number === "03" ? (
-            <div className="project-art project-art-image project-art-image-feature">
-              <img src={droneControlSimulation.url} alt="Drone control simulation showing Python keyboard flight controls and a drone in a 3D landscape" />
-            </div>
-          ) : project.number === "04" ? (
-            <div className="project-art project-art-image project-art-image-clock">
-              <img src={digitalClockShowcase.url} alt="Digital clock using Verilog HDL, with hours, minutes, seconds, RTL diagram, and FPGA display" />
-            </div>
-          ) : <ProjectArtwork type={project.art} />}
-          <span className="project-copy">
-            <span className="project-meta"><span>PROJECT {project.number}</span><span>{project.kind}</span></span>
-            <span className="project-card-title">{project.title}</span>
-            <span className="project-card-description">{project.description}</span>
-            <span className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</span>
-            <span className="project-footer"><span>VIEW PROJECT DETAILS</span><span className="project-arrow" aria-hidden="true"><ArrowUpRight /></span></span>
-          </span>
-        </Button>
-      </DialogTrigger>
+      <div className={`project-card-frame reveal stagger-${index + 1}`}>
+        <DialogTrigger asChild>
+          <Button variant="ghost" className="project-card" aria-label={`View details for ${project.title}`}>
+            {project.number === "01" ? (
+              <div className="project-art project-art-image">
+                <img src={projectPowerSupplyCover.url} alt="AC-to-DC 5V power supply PCB design with schematic, board layouts, and 3D circuit board" />
+              </div>
+            ) : project.number === "02" ? (
+              <div className="project-art project-art-image">
+                <img src={smartDoorLockImage.url} alt="Smart RFID door lock system with Arduino UNO, MFRC522 reader, keypad, LCD, and servo motor" />
+              </div>
+            ) : project.number === "03" ? (
+              <div className="project-art project-art-image project-art-image-feature">
+                <img src={droneControlSimulation.url} alt="Drone control simulation showing Python keyboard flight controls and a drone in a 3D landscape" />
+              </div>
+            ) : project.number === "04" ? (
+              <div className="project-art project-art-image project-art-image-clock">
+                <img src={digitalClockShowcase.url} alt="Digital clock using Verilog HDL, with hours, minutes, seconds, RTL diagram, and FPGA display" />
+              </div>
+            ) : <ProjectArtwork type={project.art} />}
+            <span className="project-copy">
+              <span className="project-meta"><span>PROJECT {project.number}</span><span>{project.kind}</span></span>
+              <span className="project-card-title">{project.title}</span>
+              <span className="project-card-description">{project.description}</span>
+              <span className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</span>
+              <span className="project-footer"><span>VIEW PROJECT DETAILS</span><span className="project-arrow" aria-hidden="true"><ArrowUpRight /></span></span>
+            </span>
+          </Button>
+        </DialogTrigger>
+        {project.number === "01" && (
+          <div className="project-card-social-links" aria-label="Project links">
+            <Button asChild variant="outline" size="icon" className="project-card-social-link">
+              <a href="https://lnkd.in/p/dRVexfwi" target="_blank" rel="noreferrer" aria-label="View project on LinkedIn" title="LinkedIn">
+                <Linkedin aria-hidden="true" />
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="icon" className="project-card-social-link">
+              <a href="https://github.com/NAVEENKUMARGUDE333/12V-to-5V-DC-Power-Supply-Converter-PCB" target="_blank" rel="noreferrer" aria-label="View project on GitHub" title="GitHub">
+                <Github aria-hidden="true" />
+              </a>
+            </Button>
+          </div>
+        )}
+      </div>
       <DialogContent className="project-dialog" overlayClassName="project-dialog-backdrop">
         <div className="project-dialog-topline">
           <span>PROJECT {project.number}</span>
@@ -589,20 +605,6 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         </div>
         <DialogFooter className="project-dialog-footer">
           <span>PROJECT NOTES · NAVEEN KUMAR GUDE</span>
-          {project.number === "01" && (
-            <div className="project-dialog-links" aria-label="Project links">
-              <Button asChild variant="outline" size="icon" className="project-dialog-link">
-                <a href="https://lnkd.in/p/dRVexfwi" target="_blank" rel="noreferrer" aria-label="View project on LinkedIn" title="LinkedIn">
-                  <Linkedin aria-hidden="true" />
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="icon" className="project-dialog-link">
-                <a href="https://github.com/NAVEENKUMARGUDE333/12V-to-5V-DC-Power-Supply-Converter-PCB" target="_blank" rel="noreferrer" aria-label="View project on GitHub" title="GitHub">
-                  <Github aria-hidden="true" />
-                </a>
-              </Button>
-            </div>
-          )}
           <DialogClose asChild><Button className="project-dialog-close">Close details</Button></DialogClose>
         </DialogFooter>
       </DialogContent>
