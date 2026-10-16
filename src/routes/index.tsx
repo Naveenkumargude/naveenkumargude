@@ -550,18 +550,18 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             </span>
           </Button>
         </DialogTrigger>
-        {project.number === "01" && (
+        {(project.number === "01" || project.number === "02") && (
           <div className="project-card-social-links" aria-label="Project links">
             <Button asChild variant="outline" className="project-card-social-link">
-              <a href="https://lnkd.in/p/dRVexfwi" target="_blank" rel="noreferrer" aria-label="View project on LinkedIn" title="LinkedIn">
+              <a href={project.number === "01" ? "https://lnkd.in/p/dRVexfwi" : "https://lnkd.in/p/d4N6v2b5"} target="_blank" rel="noreferrer" aria-label={`View ${project.title} on LinkedIn`} title="LinkedIn">
                 <Linkedin aria-hidden="true" /><span>LinkedIn</span>
               </a>
             </Button>
-            <Button asChild variant="outline" className="project-card-social-link">
+            {project.number === "01" && <Button asChild variant="outline" className="project-card-social-link">
               <a href="https://github.com/NAVEENKUMARGUDE333/12V-to-5V-DC-Power-Supply-Converter-PCB" target="_blank" rel="noreferrer" aria-label="View project on GitHub" title="GitHub">
                 <Github aria-hidden="true" /><span>GitHub</span>
               </a>
-            </Button>
+            </Button>}
           </div>
         )}
       </div>
