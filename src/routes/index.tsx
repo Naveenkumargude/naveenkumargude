@@ -25,6 +25,16 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import darkLogo from "@/assets/nk-logo-dark.png.asset.json";
 import lightLogo from "@/assets/nk-logo-light.png.asset.json";
 import profilePhoto from "@/assets/naveen-profile-photo.png.asset.json";
@@ -86,6 +96,7 @@ const projects = [
     description:
       "Designed a power supply PCB in EasyEDA, exploring circuit design, board layout, and the fundamentals of power conversion.",
     tags: ["EasyEDA", "PCB design", "Power supply", "Electronics"],
+    highlights: ["AC-to-DC power conversion", "5V power supply design", "Circuit layout explored in EasyEDA"],
     art: "power",
   },
   {
@@ -95,6 +106,7 @@ const projects = [
     description:
       "Built a PIN-based smart door lock in the Wokwi simulator using Arduino, exploring embedded logic and hardware interaction.",
     tags: ["Arduino", "Wokwi", "Embedded systems", "Automation"],
+    highlights: ["PIN-based access control", "Arduino embedded logic", "Hardware interaction in Wokwi"],
     art: "lock",
   },
   {
@@ -104,6 +116,7 @@ const projects = [
     description:
       "A Python project using PySimVerse to explore software-driven control, simulation, and the interaction between code and drone behavior.",
     tags: ["Python", "PySimVerse", "Drones", "Simulation"],
+    highlights: ["Python-based control", "Drone behavior in simulation", "Exploration with PySimVerse"],
     art: "drone",
   },
   {
@@ -113,6 +126,7 @@ const projects = [
     description:
       "Designed a digital clock in Verilog HDL, exploring sequential logic, counters, timing concepts, and digital system design.",
     tags: ["Verilog HDL", "Digital electronics", "RTL design", "Digital logic"],
+    highlights: ["Sequential logic", "Counters and timing concepts", "Digital system design"],
     art: "clock",
   },
 ];
@@ -495,10 +509,53 @@ function InterestLine({ number, title, description }: { number: string; title: s
 
 function ProjectCard({ project, index }: { project: (typeof projects)[number]; index: number }) {
   return (
-    <article className={`project-card reveal stagger-${index + 1}`}>
-      <ProjectArtwork type={project.art} />
-      <div className="project-copy"><div className="project-meta"><span>PROJECT {project.number}</span><span>{project.kind}</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-footer"><span>HANDS-ON EXPLORATION</span><span className="project-arrow" aria-hidden="true"><ArrowUpRight /></span></div></div>
-    </article>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" className={`project-card reveal stagger-${index + 1}`} aria-label={`View details for ${project.title}`}>
+          <ProjectArtwork type={project.art} />
+          <span className="project-copy">
+            <span className="project-meta"><span>PROJECT {project.number}</span><span>{project.kind}</span></span>
+            <span className="project-card-title">{project.title}</span>
+            <span className="project-card-description">{project.description}</span>
+            <span className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</span>
+            <span className="project-footer"><span>VIEW PROJECT DETAILS</span><span className="project-arrow" aria-hidden="true"><ArrowUpRight /></span></span>
+          </span>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="project-dialog">
+        <div className="project-dialog-topline">
+          <span>PROJECT {project.number}</span>
+          <span>{project.kind}</span>
+        </div>
+        <div className="project-dialog-scroll">
+          <DialogHeader className="project-dialog-heading">
+            <DialogTitle>{project.title}</DialogTitle>
+            <DialogDescription>{project.kind}</DialogDescription>
+          </DialogHeader>
+          <div className="project-dialog-artwork"><ProjectArtwork type={project.art} /></div>
+          <section className="project-detail-section" aria-labelledby={`project-overview-${project.number}`}>
+            <h3 id={`project-overview-${project.number}`}><span />PROJECT OVERVIEW</h3>
+            <p>{project.description}</p>
+          </section>
+          <div className="project-detail-grid">
+            <section className="project-detail-section project-detail-panel" aria-labelledby={`project-highlights-${project.number}`}>
+              <h3 id={`project-highlights-${project.number}`}><span />KEY CONCEPTS</h3>
+              <ul className="project-highlight-list">
+                {project.highlights.map((highlight) => <li key={highlight}><span aria-hidden="true">+</span>{highlight}</li>)}
+              </ul>
+            </section>
+            <section className="project-detail-section" aria-labelledby={`project-tools-${project.number}`}>
+              <h3 id={`project-tools-${project.number}`}><span />TOOLS & TECHNOLOGIES</h3>
+              <div className="project-detail-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+            </section>
+          </div>
+        </div>
+        <DialogFooter className="project-dialog-footer">
+          <span>PROJECT NOTES · NAVEEN KUMAR GUDE</span>
+          <DialogClose asChild><Button className="project-dialog-close">Close details</Button></DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 
