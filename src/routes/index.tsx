@@ -44,6 +44,7 @@ import powerBoardRender from "@/assets/power-supply-3d-board.jpg.asset.json";
 import powerBoardLayout from "@/assets/power-supply-pcb-layout.jpg.asset.json";
 import powerSupplySchematic from "@/assets/power-supply-schematic.jpg.asset.json";
 import powerSupplyOverview from "@/assets/ac-to-dc-5v-power-supply.png.asset.json";
+import projectPortfolioGrid from "@/assets/project-portfolio-grid.png.asset.json";
 import { contactFormSchema } from "@/lib/contact-validation";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -518,7 +519,11 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost" className={`project-card reveal stagger-${index + 1}`} aria-label={`View details for ${project.title}`}>
-          <ProjectArtwork type={project.art} />
+          {project.number === "01" ? (
+            <div className="project-art project-art-image">
+              <img src={projectPortfolioGrid.url} alt="AC-to-DC power supply project displayed on the portfolio website" />
+            </div>
+          ) : <ProjectArtwork type={project.art} />}
           <span className="project-copy">
             <span className="project-meta"><span>PROJECT {project.number}</span><span>{project.kind}</span></span>
             <span className="project-card-title">{project.title}</span>
